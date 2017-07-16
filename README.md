@@ -16,6 +16,8 @@ import (
 	"github.com/kavenegar/kavenegar-go"
 )
 func main() {
+	api := kavenegar.NewKavenegar(" your apikey ")
+
 	sender := ""                 //Sender Line Number(optional)
 	receptor := []string{"", ""} //Recipient numbers
 	message := "Hello Go!"       //Text message
@@ -46,6 +48,8 @@ import (
 	"github.com/kavenegar/kavenegar-go"
 )
 func main() {
+	api := kavenegar.NewKavenegar(" your apikey ")
+
 	receptor := ""
 	template := ""
 	token := ""
