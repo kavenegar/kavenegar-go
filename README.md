@@ -81,7 +81,7 @@ import (
 )
 func main() {
 	api := kavenegar.New(" your apikey here ")	
-	res, err := api.SendArray(url.Values{
+	res, err := api.Message.SendArray(url.Values{
 		"receptor": {"",""},
 		"message": {"Hello Go!","Hello Go!"},
 		"sender": {"",""},
