@@ -13,16 +13,15 @@ go get github.com/kavenegar/kavenegar-go
 package main
 import (
 	"fmt"
+	"net/url"
 	"github.com/kavenegar/kavenegar-go"
 )
 func main() {
 	api := kavenegar.NewKavenegar(" your apikey ")
-
-	sender := ""                 //Sender Line Number(optional)
-	receptor := []string{"", ""} //Recipient numbers
-	message := "Hello Go!"       //Text message
-	params := &kavenegar.MessageParam{}
-	if res, err := api.Message.Send(sender, receptor, message, params); err != nil {
+	sender := ""                 
+	receptor := []string{"", ""}
+	message := "Hello Go!" 
+	if res, err := api.Message.Send(sender, receptor, message, nil); err != nil {
 		switch err := err.(type) {
 		case *kavenegar.APIError:
 			fmt.Println(err.Error())
@@ -45,15 +44,16 @@ func main() {
 package main
 import (
 	"fmt"
+	"net/url"
 	"github.com/kavenegar/kavenegar-go"
 )
 func main() {
 	api := kavenegar.NewKavenegar(" your apikey ")
-
 	receptor := ""
 	template := ""
 	token := ""
-	params := &kavenegar.VerifyLookupParam{}
+	params := &kavenegar.VerifyLookupParam{
+	}
 	if res, err := api.Verify.Lookup(receptor, template, token, params); err != nil {
 		switch err := err.(type) {
 		case *kavenegar.APIError:
@@ -67,6 +67,36 @@ func main() {
 		fmt.Println("MessageID 	= ", res.MessageID)
 		fmt.Println("Status    	= ", res.Status)
 		//...
+	}
+
+}
+```
+### Send Bulk
+```golang
+package main
+import (
+	"fmt"
+	"net/url"
+	"github.com/kavenegar/kavenegar-go"
+)
+func main() {
+	api := kavenegar.New(" your apikey here ")	
+	res, err := api.SendArray(url.Values{
+		"receptor": {"",""},
+		"message": {"Hello Go!","Hello Go!"},
+		"sender": {"",""},
+	})
+	if err != nil {
+         switch err := err.(type) {
+			case *kavenegar.APIError:
+				fmt.Println(err.Error())
+			case *kavenegar.HTTPError:
+				fmt.Println(err.Error())
+			default:
+				fmt.Println(err.Error())
+         }
+	}else{
+		fmt.Println(res)
 	}
 }
 ```

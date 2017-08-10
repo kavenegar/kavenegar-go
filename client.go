@@ -12,27 +12,24 @@ const (
 	apiBaseURL = "https://api.kavenegar.com/"
 	apiVersion = "v1"
 	apiFormat  = "json"
-	version    = "1.0.0"
+	version    = "0.1.0"
 )
-//Return ...
+
 type Return struct {
 	Status  int    `json:"status"`
 	Message string `json:"message"`
 }
 
-//ReturnError ...
 type ReturnError struct {
 	*Return `json:"return"`
 }
 
-//Client ...
 type Client struct {
 	client  *http.Client
 	APIKey  string
 	BaseURL *url.URL
 }
 
-//NewClient ...
 func NewClient(apikey string) *Client {
 	baseURL, _ := url.Parse(apiBaseURL)
 	c := &Client{
@@ -43,7 +40,6 @@ func NewClient(apikey string) *Client {
 	return c
 }
 
-//EndPoint ...
 func (c *Client) EndPoint(parts ...string) *url.URL {
 	up := []string{apiVersion, c.APIKey}
 	up = append(up, parts...)
@@ -52,7 +48,6 @@ func (c *Client) EndPoint(parts ...string) *url.URL {
 	return u
 }
 
-//Execute ...
 func (c *Client) Execute(urlStr string, b url.Values, v interface{}) error {
 	body := strings.NewReader(b.Encode())
 	ul, _ := url.Parse(urlStr)

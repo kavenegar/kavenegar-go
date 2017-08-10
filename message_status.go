@@ -6,9 +6,9 @@ import (
 
 //MessageStatus ...
 type MessageStatus struct {
-	Messageid  int    `json:"messageid"`
+	MessageId  int    `json:"messageid"`
 	Status     int    `json:"status"`
-	Statustext string `json:"statustext"`
+	StatusText string `json:"statustext"`
 }
 
 //MessageStatusResult ...
@@ -18,11 +18,12 @@ type MessageStatusResult struct {
 }
 
 //Status ...
-func (message *MessageService) Status(messageid []int64) ([]MessageStatus, error) {
+func (message *MessageService) Status(messageid []string) ([]MessageStatus, error) {
 	u := message.client.EndPoint("sms", "status")
 	m := new(MessageStatusResult)
-	v := url.Values{}
-	v.Set("messageid",ArrayEncodeToString(messageid))
+	v := url.Values{
+		"messageid": messageid,
+	}
 	err := message.client.Execute(u.String(), v, m)
 	return m.Entries, err
 }

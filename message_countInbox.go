@@ -23,11 +23,13 @@ func (message *MessageService) CountInbox(linenumber string, startdate time.Time
 
 	v := url.Values{}
 	v.Set("linenumber", linenumber)
-	v.Set("startdate", TimeToUnix(startdate))
+	v.Set("startdate", ToUnix(startdate))
 	if !endate.IsZero() {
-		v.Set("endate", TimeToUnix(startdate))
+		v.Set("endate", ToUnix(startdate))
 	}
+	//if isread != nil {
 	v.Set("isread", map[bool]string{true: "1", false: "0"}[isread != true])
+	//}
 	return message.CreateCountInbox(v)
 }
 
@@ -36,8 +38,5 @@ func (message *MessageService) CreateCountInbox(v url.Values) (MessageCountInbox
 	u := message.client.EndPoint("sms", "countinbox")
 	m := new(MessageCountInboxResult)
 	err := message.client.Execute(u.String(), v, m)
-	if err!=nil{
-		return MessageCountInbox{}, err
-	}
 	return m.Entries[0], err
 }

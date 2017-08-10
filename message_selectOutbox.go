@@ -11,10 +11,10 @@ func (message *MessageService) SelectOutbox(startdate time.Time, endate time.Tim
 	v := url.Values{}
 
 	if !startdate.IsZero() {
-		v.Set("startdate", TimeToUnix(startdate))
+		v.Set("startdate", ToUnix(startdate))
 	}
 	if !endate.IsZero() {
-		v.Set("endate", TimeToUnix(endate))
+		v.Set("endate", ToUnix(endate))
 	}
 	if v.Get("sender") != "" {
 		v.Set("sender", v.Get("sender"))

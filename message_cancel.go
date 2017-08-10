@@ -18,11 +18,12 @@ type MessageCancelResult struct {
 }
 
 //Cancel ...
-func (message *MessageService) Cancel(messageid []int64) ([]MessageCancel, error) {
+func (message *MessageService) Cancel(messageid []string) ([]MessageCancel, error) {
 	u := message.client.EndPoint("sms", "cancel")
 	m := new(MessageCancelResult)
-	v := url.Values{}
-	v.Set("messageid",ArrayEncodeToString(messageid))
+	v := url.Values{
+		"messageid": messageid,
+	}
 	err := message.client.Execute(u.String(), v, m)
 	return m.Entries, err
 }

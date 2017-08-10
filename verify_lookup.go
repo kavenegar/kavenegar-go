@@ -17,10 +17,6 @@ func (c *VerifyService) Lookup(receptor string, template string, token string, p
 func (c *VerifyService) CreateLookup(v url.Values) (Message, error) {
 	u := c.client.EndPoint("verify", "lookup")
 	m := new(MessageResult)
-	
-	err:= c.client.Execute(u.String(), v, m);
-	if err!=nil{
-		return Message{}, err
-	}
+	err := c.client.Execute(u.String(), v, m)
 	return m.Entries[0], err
 }

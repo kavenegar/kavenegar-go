@@ -5,11 +5,12 @@ import (
 )
 
 //Select ...
-func (message *MessageService) Select(messageid []int64) ([]Message, error) {
+func (message *MessageService) Select(messageid []string) ([]Message, error) {
 	u := message.client.EndPoint("sms", "select")
 	m := new(MessageResult)
-	v := url.Values{}
-	v.Set("messageid",ArrayEncodeToString(messageid))
+	v := url.Values{
+		"messageid": messageid,
+	}
 	err := message.client.Execute(u.String(), v, m)
 	return m.Entries, err
 }

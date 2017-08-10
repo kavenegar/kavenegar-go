@@ -8,8 +8,8 @@ type Kavenegar struct {
 	Call    *CallService
 }
 
-//NewKavenegar ...
-func NewKavenegar(apikey string) *Kavenegar {
+//New ...
+func New(apikey string) *Kavenegar {
 	c := NewClient(apikey)
 	k := &Kavenegar{}
 	k.Account = NewAccountService(c)

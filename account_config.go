@@ -2,31 +2,26 @@ package kavenegar
 
 import (
 	"net/url"
-
-	"github.com/kavenegar/kavenegar-go/enums/account/apilog"
-	"github.com/kavenegar/kavenegar-go/enums/account/dailyreport"
-	"github.com/kavenegar/kavenegar-go/enums/account/debugmode"
-	"github.com/kavenegar/kavenegar-go/enums/account/resendfailed"
 )
 
 //AccountConfig ...
 type AccountConfig struct {
-	Apilogs        AccountAPILog.Type       `json:"apilogs"`
-	Dailyreport    AccountDailyReport.Type  `json:"dailyreport"`
-	Debugmode      AccountDebugMode.Type    `json:"debugmode"`
-	Defaultsender  string                   `json:"defaultsender"`
-	Mincreditalarm string                   `json:"mincreditalarm"`
-	Resendfailed   AccountResendFailed.Type `json:"resendfailed"`
+	Apilogs        AccountAPILogType       `json:"apilogs"`
+	Dailyreport    AccountDailyReportType  `json:"dailyreport"`
+	Debugmode      AccountDebugModeType    `json:"debugmode"`
+	Defaultsender  string                  `json:"defaultsender"`
+	Mincreditalarm string                  `json:"mincreditalarm"`
+	Resendfailed   AccountResendFailedType `json:"resendfailed"`
 }
 
 //AccountConfigParam ...
 type AccountConfigParam struct {
-	Apilogs        AccountAPILog.Type
-	Dailyreport    AccountDailyReport.Type
-	Debugmode      AccountDebugMode.Type
+	Apilogs        AccountAPILogType
+	Dailyreport    AccountDailyReportType
+	Debugmode      AccountDebugModeType
 	Defaultsender  string
 	Mincreditalarm string
-	Resendfailed   AccountResendFailed.Type
+	Resendfailed   AccountResendFailedType
 }
 
 //AccountConfigResult ...
@@ -43,7 +38,7 @@ func (c *AccountService) Config(param *AccountConfigParam) (AccountConfig, error
 
 //CreateConfig ..
 func (c *AccountService) CreateConfig(v url.Values) (AccountConfig, error) {
-	u := c.client.EndPoint("account", "config")
+	u := c.client.EndPoint("account", "info")
 	m := new(AccountConfigResult)
 	err := c.client.Execute(u.String(), v, m)
 	return m.Entries, err
