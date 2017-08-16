@@ -10,11 +10,16 @@ type Kavenegar struct {
 
 //New ...
 func New(apikey string) *Kavenegar {
-	c := NewClient(apikey)
+	client := NewClient(apikey)
+	return NewWithClient(client)
+}
+
+//NewWithClient ...
+func NewWithClient(client *Client) *Kavenegar {
 	k := &Kavenegar{}
-	k.Account = NewAccountService(c)
-	k.Message = NewMessageService(c)
-	k.Verify = NewVerifyService(c)
-	k.Call = NewCallService(c)
+	k.Account = NewAccountService(client)
+	k.Message = NewMessageService(client)
+	k.Verify = NewVerifyService(client)
+	k.Call = NewCallService(client)
 	return k
 }

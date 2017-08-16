@@ -15,7 +15,10 @@ func (call *CallService) MakeTTS(receptor string, message string, params *CallPa
 //CreateMakeTTS ...
 func (call *CallService) CreateMakeTTS(v url.Values) (Message, error) {
 	u := call.client.EndPoint("call", "maketts")
-	res := new(MessageResult)
-	err := call.client.Execute(u.String(), v, res)
-	return res.Entries[0], err
+	m := new(MessageResult)
+	err := call.client.Execute(u.String(), v, m)
+	if	m.Entries==nil{
+		return Message{},err
+	}
+	return m.Entries[0], err
 }
