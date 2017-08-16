@@ -3,6 +3,7 @@ package kavenegar
 import (
 	"encoding/json"
 	"fmt"
+	"net"
 	"net/http"
 	"net/url"
 	"strings"
@@ -25,23 +26,23 @@ type ReturnError struct {
 }
 
 type Client struct {
-	client  *http.Client
-	APIKey  string
+	BaseClient  *http.Client
+	apikey  string
 	BaseURL *url.URL
 }
 
 func NewClient(apikey string) *Client {
 	baseURL, _ := url.Parse(apiBaseURL)
 	c := &Client{
-		client:  http.DefaultClient,
+		BaseClient:  http.DefaultClient,
 		BaseURL: baseURL,
-		APIKey:  apikey,
+		apikey:  apikey,
 	}
 	return c
 }
 
 func (c *Client) EndPoint(parts ...string) *url.URL {
-	up := []string{apiVersion, c.APIKey}
+	up := []string{apiVersion, c.apikey}
 	up = append(up, parts...)
 	u, _ := url.Parse(strings.Join(up, "/"))
 	u.Path = fmt.Sprintf("/%s.%s", u.Path, apiFormat)
@@ -56,8 +57,11 @@ func (c *Client) Execute(urlStr string, b url.Values, v interface{}) error {
 	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("Accept", "application/json")
 	req.Header.Add("Accept-Charset", "utf-8")
-	resp, err := c.client.Do(req)
+	resp, err := c.BaseClient.Do(req)
 	if err != nil {
+		if err, ok := err.(net.Error); ok && err.Timeout() {
+			return err
+		}
 		return &HTTPError{
 			Status:  resp.StatusCode,
 			Message: resp.Status,

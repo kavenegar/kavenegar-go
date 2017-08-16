@@ -34,5 +34,8 @@ func (message *MessageService) CreateCountOutbox(v url.Values) (MessageCountOutb
 	u := message.client.EndPoint("sms", "countoutbox")
 	m := new(MessageCountOutboxResult)
 	err := message.client.Execute(u.String(), v, m)
+	if	m.Entries==nil{
+		return MessageCountOutbox{},err
+	}
 	return m.Entries[0], err
 }

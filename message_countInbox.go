@@ -38,5 +38,8 @@ func (message *MessageService) CreateCountInbox(v url.Values) (MessageCountInbox
 	u := message.client.EndPoint("sms", "countinbox")
 	m := new(MessageCountInboxResult)
 	err := message.client.Execute(u.String(), v, m)
+	if	m.Entries==nil{
+		return MessageCountInbox{},err
+	}
 	return m.Entries[0], err
 }
