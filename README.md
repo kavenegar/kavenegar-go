@@ -1,7 +1,6 @@
-[![Build Status](https://travis-ci.org/KaveNegar/kavenegar-go.svg?branch=master)](https://travis-ci.org/KaveNegar/kavenegar-go)
- 
 # kavenegar-go 
- 
+ [![Build Status](https://travis-ci.org/KaveNegar/kavenegar-go.svg?branch=master)](https://travis-ci.org/KaveNegar/kavenegar-go)
+
  
 ## Installation
 ```
