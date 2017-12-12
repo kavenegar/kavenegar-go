@@ -103,8 +103,6 @@ func main() {
 ## Contribution
 Bug fixes, docs, and enhancements welcome! Please let us know support@kavenegar.com
 
-
-
 <hr>
 
 <div dir='rtl'>
