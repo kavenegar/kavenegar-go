@@ -1,14 +1,15 @@
 package kavenegar
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 	"net/url"
 	"reflect"
 	"strconv"
 	"strings"
 	"time"
 )
+
 //ToString ...
 func ToString(i interface{}) string {
 	return strings.Trim(strings.Replace(fmt.Sprint(i), " ", ",", -1), "[]")
@@ -16,7 +17,7 @@ func ToString(i interface{}) string {
 
 //ToJson ...
 func ToJson(i interface{}) string {
-	_json,_ := json.Marshal(i)
+	_json, _ := json.Marshal(i)
 	return string(_json)
 }
 
@@ -28,9 +29,9 @@ func ToUnix(t time.Time) string {
 //structToUrlValues ...
 func structToURLValues(i interface{}) url.Values {
 	v := url.Values{}
-	// if i == nil {
-	// 	return v
-	// }
+	if reflect.ValueOf(i).IsNil() {
+		return v
+	}
 	m := structToMapString(i)
 	for k, s := range m {
 		switch {
