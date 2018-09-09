@@ -26,17 +26,17 @@ type ReturnError struct {
 }
 
 type Client struct {
-	BaseClient  *http.Client
-	apikey  string
-	BaseURL *url.URL
+	BaseClient *http.Client
+	apikey     string
+	BaseURL    *url.URL
 }
 
 func NewClient(apikey string) *Client {
 	baseURL, _ := url.Parse(apiBaseURL)
 	c := &Client{
-		BaseClient:  http.DefaultClient,
-		BaseURL: baseURL,
-		apikey:  apikey,
+		BaseClient: http.DefaultClient,
+		BaseURL:    baseURL,
+		apikey:     apikey,
 	}
 	return c
 }
@@ -61,6 +61,13 @@ func (c *Client) Execute(urlStr string, b url.Values, v interface{}) error {
 	if err != nil {
 		if err, ok := err.(net.Error); ok && err.Timeout() {
 			return err
+		}
+		if resp == nil {
+			return &HTTPError{
+				Status:  http.StatusInternalServerError,
+				Message: "nil api response",
+				Err:     err,
+			}
 		}
 		return &HTTPError{
 			Status:  resp.StatusCode,
