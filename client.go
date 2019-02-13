@@ -59,7 +59,7 @@ func (c *Client) Execute(urlStr string, b url.Values, v interface{}) error {
 	req.Header.Add("Accept-Charset", "utf-8")
 	resp, err := c.BaseClient.Do(req)
 	if err != nil {
-		if err, ok := err.(net.Error); ok && err.Timeout() {
+		if err, ok := err.(net.Error); ok {
 			return err
 		}
 		if resp == nil {
