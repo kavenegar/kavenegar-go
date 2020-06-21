@@ -1,5 +1,14 @@
 # Ideas & editors
 .idea
+*.iml
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# VSCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
@@ -8,6 +17,18 @@
 *.code-workspace
 # Local History for Visual Studio Code
 .history/
+__debug_bin
+debug.test
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
 
 # Binaries for programs and plugins
 *.exe
@@ -22,4 +43,7 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# Other files
+.DS_Store
+Thumbs.db
 
