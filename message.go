@@ -66,6 +66,8 @@ const (
 	Type_MessageStatus_Queued       MessageStatusType = 1
 	Type_MessageStatus_Schulded     MessageStatusType = 2
 	Type_MessageStatus_SentToCenter MessageStatusType = 4
+	Type_MessageStatus_Sent         MessageStatusType = 5
+	Type_MessageStatus_Failed       MessageStatusType = 6
 	Type_MessageStatus_Delivered    MessageStatusType = 10
 	Type_MessageStatus_Undelivered  MessageStatusType = 11
 	Type_MessageStatus_Canceled     MessageStatusType = 13
@@ -78,6 +80,8 @@ var MessageStatusMap = map[MessageStatusType]string{
 	Type_MessageStatus_Queued:       "Queued",
 	Type_MessageStatus_Schulded:     "Schulded",
 	Type_MessageStatus_SentToCenter: "SentToCenter",
+	Type_MessageStatus_Sent:         "Sent",
+	Type_MessageStatus_Failed:       "Failed",
 	Type_MessageStatus_Delivered:    "Delivered",
 	Type_MessageStatus_Undelivered:  "Undelivered",
 	Type_MessageStatus_Canceled:     "Canceled",
