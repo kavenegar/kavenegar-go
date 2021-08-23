@@ -7,6 +7,7 @@ import (
 //Send ...
 func (m *MessageService) Send(sender string, receptor []string, message string, params *MessageSendParam) ([]Message, error) {
 	v := url.Values{}
+	v.Set("sender", sender)
 	v.Set("receptor", ToString(receptor))
 	v.Set("message", message)
 	if params != nil {
