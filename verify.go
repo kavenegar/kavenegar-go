@@ -1,24 +1,25 @@
 package kavenegar
 
-//VerifyService ...
+// VerifyService ...
 type VerifyService struct {
 	client *Client
 }
 
-//VerifyLookupResult ...
+// VerifyLookupResult ...
 type VerifyLookupResult struct {
 	*Return `json:"return"`
 	Entries Message `json:"entries"`
 }
 
-//VerifyLookupParam ...
+// VerifyLookupParam ...
 type VerifyLookupParam struct {
 	Token2 string
 	Token3 string
 	Type   VerifyLookupType
+	Tokens map[string]string
 }
 
-//NewVerifyService ...
+// NewVerifyService ...
 func NewVerifyService(client *Client) *VerifyService {
 	m := &VerifyService{client: client}
 	return m
