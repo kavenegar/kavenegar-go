@@ -17,7 +17,6 @@ type VerifyLookupParam struct {
 	Token3 string
 	Tokens map[string]string
 	Type   VerifyLookupType
-	Tokens map[string]string
 }
 
 // NewVerifyService ...
