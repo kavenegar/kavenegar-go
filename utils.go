@@ -54,12 +54,23 @@ func structToMapString(i interface{}) map[string][]string {
 	tp := iv.Type()
 
 	for i := 0; i < iv.NumField(); i++ {
-		k := tp.Field(i).Name
-		f := iv.Field(i)
-		ms[k] = valueToString(f)
+		if isMap(iv.Field(i)) {
+			m := iv.Field(i).Interface()
+			for key, value := range m.(map[string]string) {
+				ms[key] = []string{value}
+			}
+		} else {
+			k := tp.Field(i).Name
+			f := iv.Field(i)
+			ms[k] = valueToString(f)
+		}
 	}
 
 	return ms
+}
+
+func isMap(f reflect.Value) bool {
+	return reflect.TypeOf(f.Interface()).Kind() == reflect.Map
 }
 
 // valueToString converts supported type of f as slice string

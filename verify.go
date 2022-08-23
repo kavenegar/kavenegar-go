@@ -15,6 +15,7 @@ type VerifyLookupResult struct {
 type VerifyLookupParam struct {
 	Token2 string
 	Token3 string
+	Tokens map[string]string
 	Type   VerifyLookupType
 }
 
