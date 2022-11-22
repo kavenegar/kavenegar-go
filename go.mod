@@ -1,3 +1,3 @@
-module github.com/kavenegar/kavenegar-go
+module github.com/mrezagolestan/kavenegar-go
 
 go 1.14
