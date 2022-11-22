@@ -33,8 +33,8 @@ const (
 )
 
 var VerifyLookupTypeMap = map[VerifyLookupType]string{
-	Type_VerifyLookup_Sms:  "0",
-	Type_VerifyLookup_Call: "1",
+	Type_VerifyLookup_Sms:  "sms",
+	Type_VerifyLookup_Call: "call",
 }
 
 func (t VerifyLookupType) String() string {
