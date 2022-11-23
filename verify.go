@@ -25,18 +25,9 @@ func NewVerifyService(client *Client) *VerifyService {
 	return m
 }
 
-type VerifyLookupType int
+type VerifyLookupType string
 
 const (
-	Type_VerifyLookup_Sms VerifyLookupType = iota
-	Type_VerifyLookup_Call
+	Type_VerifyLookup_Sms  VerifyLookupType = "sms"
+	Type_VerifyLookup_Call VerifyLookupType = "call"
 )
-
-var VerifyLookupTypeMap = map[VerifyLookupType]string{
-	Type_VerifyLookup_Sms:  "sms",
-	Type_VerifyLookup_Call: "call",
-}
-
-func (t VerifyLookupType) String() string {
-	return VerifyLookupTypeMap[t]
-}
